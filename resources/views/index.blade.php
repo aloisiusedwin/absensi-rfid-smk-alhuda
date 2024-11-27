@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Manajemen Jadwal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Tambahkan meta viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/4c4e4140eb.js"></script>
@@ -25,6 +25,7 @@
         .navbar {
             background: linear-gradient(to right, #1e40af, #14b8a6);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
         }
 
         .navbar-brand img {
@@ -42,10 +43,19 @@
             border: none;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(10px);
+            animation: slideUp 0.8s ease-out;
         }
 
-        .card .badge {
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .badge {
             font-size: 1rem;
+            animation: fadeIn 1.2s ease-in-out;
         }
 
         footer {
@@ -53,6 +63,7 @@
             color: white;
             padding: 15px 0;
             text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         footer p {
@@ -70,9 +81,43 @@
             }
 
             .card {
-                max-width: 100%; /* Full width for small devices */
+                max-width: 100%;
                 margin: 0 auto;
             }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert {
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .form-control {
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+            transform: scale(1.02);
         }
     </style>
 </head>
