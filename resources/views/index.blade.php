@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Manajemen Jadwal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Tambahkan meta viewport -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/4c4e4140eb.js"></script>
@@ -37,6 +38,16 @@
             font-weight: bold;
         }
 
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card .badge {
+            font-size: 1rem;
+        }
+
         footer {
             background: linear-gradient(to right, #1e40af, #14b8a6);
             color: white;
@@ -48,15 +59,30 @@
             margin: 0;
             font-size: 0.85rem;
         }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .navbar-brand img {
+                height: 30px;
+            }
+
+            .card {
+                max-width: 100%; /* Full width for small devices */
+                margin: 0 auto;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="{{ asset('img/logo.png') }}" alt="Logo">
-                SMK Al-Huda
+                <span class="ms-2">SMK Al-Huda</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

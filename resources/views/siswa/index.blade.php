@@ -1,107 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('adminlte::page')
+@vite ('resources/css/app.css')
 
-<head>
-    <title>Absensi SMK Al-Huda</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://use.fontawesome.com/4c4e4140eb.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <style>
-        /* Styling untuk memastikan footer berada di bawah */
-        html, body {
-            height: 100%;
-        }
+@section('title', 'Manajemen Siswa')
 
-        body {
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-        }
-
-        .content {
-            flex: 1;
-        }
-
-        footer {
-            background: linear-gradient(135deg, #1a73e8, #1454b4);
-            color: #ffffff;
-            text-align: center;
-            padding: 20px 0;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo SMK Al-Huda" class="me-3" width="80" height="50">
-                <span class="fw-bold">SMK Al-Huda</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active text-white" href="#"><i class="fa fa-home me-2"></i>Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#"><i class="fa fa-archive me-2"></i>Rekap</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="content">
-        <div class="container my-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center">
-                    @if ($jadwal != null)
-                    <h1 class="mb-4 text-primary">Jadwal Saat Ini</h1>
-                    <div class="card shadow border-0">
-                        <div class="card-body">
-                            <h5 class="card-title text-success fw-bold">{{$jadwal->makul}}</h5>
-                            <p class="card-text mt-3">Jam mulai: <span class="badge bg-success">{{$jadwal->jam_mulai}}</span></p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <label for="rfid" class="form-label fw-bold">Masukkan RFID Anda:</label>
-                        <input type="text" name="rfid" id="rfid" class="form-control text-center" placeholder="Scan RFID Anda" autofocus>
-                        <button class="btn btn-primary mt-3">Submit</button>
-                    </div>
-                    @else
-                    <div class="alert alert-danger mt-4" role="alert">
-                        <h4 class="alert-heading">Tidak Ada Jadwal</h4>
-                        <p class="mt-2">Tidak ada jadwal pada pukul {{$waktuSekarang}}. Silakan kembali lagi nanti.</p>
-                    </div>
-                    @endif
-                </div>
+@section('content')
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header dengan Logo -->
+    <div class="header mb-10 text-center">
+        <div class="flex flex-col md:flex-row justify-center items-center mb-4">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold text-blue-600">Manajemen Data Siswa</h1>
+                <p class="text-gray-500 text-sm md:text-base">Tambah, edit, atau lihat daftar siswa dengan mudah</p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2024 SMK Al-Huda | All Rights Reserved</p>
+    <!-- Form Tambah Siswa -->
+    <div class="form-card bg-white shadow-xl rounded-lg p-6 mb-10 border-t-4 border-blue-500">
+        <h2 class="text-xl md:text-2xl font-bold text-gray-700 mb-6 text-center">Tambah Data Siswa</h2>
+        <form action="{{ route('siswa.add') }}" method="POST" class="space-y-6">
+            @csrf
+            <!-- Input Nama -->
+            <div class="form-group">
+                <label for="nama" class="block text-gray-600 font-medium">Nama Siswa</label>
+                <div class="relative">
+                    <input type="text" name="nama" id="nama" placeholder="Masukkan Nama Siswa" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none">
+                    <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Input RFID -->
+            <div class="form-group">
+                <label for="rfid" class="block text-gray-600 font-medium">RFID</label>
+                <div class="relative">
+                    <input type="number" name="rfid" id="rfid" placeholder="Masukkan RFID" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none">
+                    <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <i class="fas fa-id-card"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Input NIM -->
+            <div class="form-group">
+                <label for="nim" class="block text-gray-600 font-medium">NIM</label>
+                <div class="relative">
+                    <input type="text" name="nim" id="nim" placeholder="Masukkan Nomor Induk Siswa" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none">
+                    <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                        <i class="fas fa-key"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Tombol Submit -->
+            <div class="text-center">
+                <button type="submit" class="button-primary">
+                    Tambah Siswa
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabel Daftar Siswa -->
+    <div class="table-card bg-white shadow-xl rounded-lg p-6 border-t-4 border-blue-500">
+        <h2 class="text-xl md:text-2xl font-bold text-gray-700 mb-6">Daftar Siswa</h2>
+        <div class="overflow-x-auto">
+            <table class="table w-full border-collapse border border-gray-300 text-left text-sm md:text-base">
+                <thead class="bg-gradient-to-r from-blue-500 to-teal-400 text-white">
+                    <tr>
+                        <th class="py-3 px-4">RFID</th>
+                        <th class="py-3 px-4">Nama</th>
+                        <th class="py-3 px-4">NIM</th>
+                        <th class="py-3 px-4 text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    @foreach ($siswas as $item)
+                    <tr class="hover:bg-gray-100 transition">
+                        <td class="py-3 px-4">{{ $item->rfid }}</td>
+                        <td class="py-3 px-4">{{ $item->nama }}</td>
+                        <td class="py-3 px-4">{{ $item->nim }}</td>
+                        <td class="py-3 px-4 text-center">
+                            <a href="{{ URL::signedRoute('siswa.edit', $item->id) }}" 
+                                class="button-secondary">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </footer>
+    </div>
+</div>
 
-    @vite('resources/js/homepage.js')
-
-</body>
-
-</html>
+<!-- Footer -->
+<footer class="mt-10 bg-gray-100 py-6 text-center text-gray-500 text-sm">
+    <p>© 2024 SMK Al-Huda. All Rights Reserved.</p>
+</footer>
+@stop
