@@ -135,7 +135,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-home"></i> Home</a>
+                        <a class="nav-link" href="jadwal"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fa fa-archive"></i> Rekap</a>
