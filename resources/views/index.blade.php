@@ -20,7 +20,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active" class="text-danger">
-        <a class="nav-link" href="#"><i class="fa fa-home fa-3x" data-toggle="tooltip" data-placement="bot" title="Home" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/jadwal"><i class="fa fa-home fa-3x" data-toggle="tooltip" data-placement="bot" title="Home" aria-hidden="true"></i><span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active" class="text-success">
         <a class="nav-link" href="#"><i class="fa fa-archive fa-3x" data-toggle="tooltip" data-placement="bot" title="Rekap" aria-hidden="true"></i></a>
