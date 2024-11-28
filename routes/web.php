@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 // Route::get('/', function () {
 //     return view('index');
 //     // return view('welcome');
@@ -40,3 +41,30 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+=======
+Route::get('/', function () {
+    return view('/login');
+});
+
+
+
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get("siswa", [SiswaController::class, "index"])->name("siswa");
+    Route::post("siswa/post", [SiswaController::class, "store"])->name("siswa.add");
+    Route::get("siswa/{id}", [SiswaController::class, "edit"])->name("siswa.edit")->middleware("signed");
+    Route::post("siswa/update", [SiswaController::class, "update"])->name("siswa.update");
+
+    Route::get("jadwal",[JadwalController::class, "index"])->name("jadwal");
+    Route::post("jadwal/post", [JadwalController::class, "store"])->name("jadwal.add");
+    Route::get("jadwal/{id}", [JadwalController::class, "edit"])->name("jadwal.edit")->middleware("signed");
+    Route::post("jadwal/update", [JadwalController::class, "update"])->name("jadwal.update");
+
+
+    Route::get("/", [HomepageController::class, "index"])->name("homepage");
+});
+
+>>>>>>> d91873e6e894c35cd200fa5f79ff2ef11cc02b6a

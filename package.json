@@ -16,7 +16,13 @@
     "dependencies": {
         "@eonasdan/tempus-dominus": "^6.7.13",
         "@popperjs/core": "^2.11.8",
+<<<<<<< HEAD
         "jquery": "^3.7.1",
         "tailwind": "^4.0.0"
+=======
+        "@tailwindcss/typography": "^0.5.15",
+        "dependencies": "^0.0.1",
+        "jquery": "^3.7.1"
+>>>>>>> d91873e6e894c35cd200fa5f79ff2ef11cc02b6a
     }
 }

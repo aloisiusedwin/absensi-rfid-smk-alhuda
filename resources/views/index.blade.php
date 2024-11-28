@@ -7,9 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/4c4e4140eb.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
     <style>
         body {
             font-family: 'Arial', sans-serif;
+=======
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Font Styling */
+        body, html {
+            font-family: 'Montserrat', sans-serif;
+>>>>>>> d91873e6e894c35cd200fa5f79ff2ef11cc02b6a
             background: linear-gradient(to bottom right, #e0f7fa, #f0f9ff);
             color: #333;
             min-height: 100vh;
@@ -135,7 +143,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+<<<<<<< HEAD
                         <a class="nav-link" href="jadwal"><i class="fa fa-home"></i> Dashboard</a>
+=======
+                        <a class="nav-link" href="#"><i class="fa fa-home"></i> Home</a>
+>>>>>>> d91873e6e894c35cd200fa5f79ff2ef11cc02b6a
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fa fa-archive"></i> Rekap</a>
