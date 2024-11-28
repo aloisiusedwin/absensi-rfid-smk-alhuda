@@ -2,7 +2,7 @@
 
 ### How To Use
 ```
-git clone https://github.com/lintangtimur/rfid-absensi-v2.git
+git clone https://github.com/aloisiusedwin/absensi-rfid-smk-alhuda.git
 composer install
 php artisan migrate:fresh --seed
 ```
