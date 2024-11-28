@@ -270,3 +270,28 @@ footer {
         height: 96px;
     }
 }
+/* Pastikan ikon berada di dalam kotak input */
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password:hover {
+    color: #2563eb;
+}
+
+/* Pastikan input dan ikon tidak tumpang tindih */
+.input-group .form-control {
+    padding-right: 2.5rem; /* Tambahkan ruang untuk ikon */
+}
+    
