@@ -8,8 +8,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Link to custom app.css -->
     @vite('resources/css/app.css')
+    <!-- Google Font Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* Global Font Styling */
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-200 to-indigo-300">
     <form action="{{ route('login.process') }}" method="POST" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">

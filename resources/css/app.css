@@ -35,3 +35,16 @@ input[type="password"] {
 button {
     @apply w-full py-2 bg-gradient-to-r from-teal-400 to-indigo-400 text-white rounded-md font-semibold hover:from-indigo-400 hover:to-teal-400 focus:ring-4 focus:ring-indigo-200 transition duration-300;
 }
+.flatpickr-calendar {
+    background-color: #f8f9fa; /* Warna latar belakang */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+.flatpickr-time .flatpickr-time-separator {
+    color: #007bff; /* Warna pemisah ":" */
+}
+.flatpickr-day.selected,
+.flatpickr-time input:focus {
+    background: linear-gradient(to right, #007bff, #0056b3); /* Gradasi pada elemen terpilih */
+    color: #fff;
+}
