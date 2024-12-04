@@ -23,7 +23,7 @@ class UpdateJadwalRequest extends FormRequest
     {
         return [
             "jadwal_id"=> "required",
-            "makul"=> "required",
+            "mapel"=> "required",
             "jam_mulai"=> "required|date_format:H:i:s",
             "jam_akhir"=> "required|date_format:H:i:s|after:jam_mulai",
             "hari"=> "required"

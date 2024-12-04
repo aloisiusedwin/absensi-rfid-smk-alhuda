@@ -56,4 +56,10 @@ class JadwalService
     {
         return $this->jadwalRepository->update($data);
     }
+    
+    public function delete($id)
+    {
+        return $this->jadwalRepository->delete($id);
+    }
+
 }

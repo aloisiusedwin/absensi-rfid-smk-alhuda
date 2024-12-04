@@ -18,7 +18,7 @@ namespace App\Models{
  * @property string $hari
  * @property string $jam_mulai
  * @property string $jam_akhir
- * @property string $makul
+ * @property string $mapel
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newModelQuery()
@@ -29,7 +29,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereJamAkhir($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereJamMulai($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereMakul($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereMapel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereUpdatedAt($value)
  */
 	class Jadwal extends \Eloquent {}
@@ -63,7 +63,7 @@ namespace App\Models{
  * @property int $id
  * @property string $rfid
  * @property string $nama
- * @property string $nim
+ * @property string $nis
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa newModelQuery()
@@ -72,7 +72,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereNama($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereNim($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereNis($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereRfid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereUpdatedAt($value)
  */

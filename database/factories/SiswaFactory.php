@@ -20,7 +20,7 @@ class SiswaFactory extends Factory
         return [
             "rfid" => Ulid::generate(true),
             "nama" => fake("id")->name(),
-            "nim" => "15.N1.00". random_int(10, 99),
+            "nis" => "15.N1.00". random_int(10, 99),
             'created_at' => now(),
             'updated_at' => now(),
         ];

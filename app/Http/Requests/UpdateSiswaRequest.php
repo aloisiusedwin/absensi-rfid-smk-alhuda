@@ -23,7 +23,7 @@ class UpdateSiswaRequest extends FormRequest
     {
         return [
             "nama"=> "required",
-            "nim"=> "required",
+            "nis"=> "required",
             "rfid"=>"required"
         ];
     }

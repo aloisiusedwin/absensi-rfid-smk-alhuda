@@ -24,7 +24,7 @@ class SiswaPostRequest extends FormRequest
         return [
             "nama"=> "required",
             "rfid"=> "required|unique:siswas|max:16",
-            "nim"=> "required"
+            "nis"=> "required"
         ];
     }
 }

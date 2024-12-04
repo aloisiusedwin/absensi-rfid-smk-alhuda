@@ -11,4 +11,9 @@ class Jadwal extends Model
     protected $table = "jadwals";
     
     protected $guarded = ['id'];
+
+    public function rekaps()
+    {
+        return $this->hasMany(Rekap::class);
+    }
 }

@@ -11,4 +11,9 @@ class Siswa extends Model
     
     protected $table = "siswas";
     protected $guarded = ['id'];
+    
+    public function rekaps()
+    {
+        return $this->hasMany(Rekap::class);
+    }
 }

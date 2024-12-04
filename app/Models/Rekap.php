@@ -11,4 +11,14 @@ class Rekap extends Model
     
     protected $table = "rekaps";
     protected $guarded = ['id'];
+    
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class);
+    }
+
+    public function jadwal()
+    {
+        return $this->belongsTo(Jadwal::class);
+    }
 }

@@ -23,7 +23,7 @@
             {{-- With prepend slot --}}
             <form action="{{route("jadwal.add")}}" method="post">
                 @csrf
-            <x-adminlte-input name="makul" label="Nama Mata Kuliah" value="{{old('makul')}}" placeholder="makul">
+            <x-adminlte-input name="mapel" label="Nama Mata Pelajaran" value="{{old('mapel')}}" placeholder="mapel">
             </x-adminlte-input>
 
             <x-adminlte-input name="jam_mulai" label="Jam Mulai" value="{{old('jam_mulai')}}" id="jam_mulai">
@@ -33,7 +33,7 @@
             </x-adminlte-input>
 
             <div class="form-group">
-                <label for="makul" >Hari</label>
+                <label for="mapel" >Hari</label>
                 <div class="input-group">
                     <select class="js-example-basic-single form-control" name="hari">
                         @foreach ($hari as $item)
@@ -50,11 +50,11 @@
         </form>
         </div>
 
-        <div class="col-md-12">
-            @php
+<div class="col-md-12">
+@php
 $heads = [
     'Hari',
-    'Makul',
+    'Mapel',
     'Jam mulai',
     ['label' => 'Jam Akhir', 'width' => 40],
     ['label' => 'Actions', 'no-export' => true, 'width' => 10],
@@ -66,19 +66,24 @@ $heads = [
 <x-adminlte-datatable id="table1" :heads="$heads">
     @foreach ($jadwals as $item)
     <tr>
-        <td>{{$item->hari}}</td>
-        <td>{{$item->makul}}</td>
-        <td>{{$item->jam_mulai}}</td>
-        <td>{{$item->jam_akhir}}</td>
-        <td><a href="{{URL::signedRoute("jadwal.edit", $item->id)}}" class="btn btn-primary">Edit</a></td>
+        <td>{{ $item->hari }}</td>
+        <td>{{ $item->mapel }}</td>
+        <td>{{ $item->jam_mulai }}</td>
+        <td>{{ $item->jam_akhir }}</td>
+        <td>
+            <a href="{{ URL::signedRoute('jadwal.edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+            <form action="{{ route('jadwal.destroy', $item->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+            </form>
+        </td>
     </tr>
-@endforeach
+    @endforeach
 </x-adminlte-datatable>
+
         </div>
     </div>
-
-    
-    
 @stop
 
 @section('css')

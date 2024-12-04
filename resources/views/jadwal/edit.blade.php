@@ -24,7 +24,7 @@
             <form action="{{route("jadwal.update")}}" method="post">
                 @csrf
                 <input type="hidden" name="jadwal_id" value="{{$jadwal->id}}">
-            <x-adminlte-input name="makul" label="Nama Mata Kuliah" value="{{old('makul',$jadwal->makul)}}" placeholder="makul">
+            <x-adminlte-input name="mapel" label="Nama Mata Pelajaran" value="{{old('mapel',$jadwal->mapel)}}" placeholder="mapel">
             </x-adminlte-input>
 
             <x-adminlte-input name="jam_mulai" label="Jam Mulai" value="{{old('jam_mulai', $jadwal->jam_mulai)}}" id="jam_mulai">
@@ -34,7 +34,7 @@
             </x-adminlte-input>
 
             <div class="form-group">
-                <label for="makul" >Hari</label>
+                <label for="mapel" >Hari</label>
                 <div class="input-group">
                     <select class="js-example-basic-single form-control" name="hari">
                         @foreach ($hari as $item)

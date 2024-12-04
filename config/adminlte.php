@@ -307,13 +307,18 @@ return [
 
         [
             'text' => 'Jadwal',
-            'route'         => 'jadwal',
+            'route'=> 'jadwal',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Siswa',
             "route"=> "siswa",
             'icon' => 'fas fa-fw fa-lock',
+        ],
+        [
+            'text' => 'Rekap',
+            "route"=> "jadwal.index",
+            'icon' => 'fas fa-fw fa-book',
         ],
         
         

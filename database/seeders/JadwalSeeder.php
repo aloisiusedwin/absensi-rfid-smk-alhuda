@@ -11,7 +11,7 @@ class JadwalSeeder extends Seeder
      */
     public function run(): void
     {
-        $makul = [
+        $mapel = [
             "kecerdasan buatan",
             "aplikom",
             "sistem basis data",

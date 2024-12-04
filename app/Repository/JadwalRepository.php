@@ -69,4 +69,16 @@ class JadwalRepository
 
         return $s->update($data);
     }
+    
+    public function delete($id)
+    {
+        $jadwal = Jadwal::find($id);
+        if ($jadwal) {
+            return $jadwal->delete();
+        }
+    
+        return false;
+    }
+    
+
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("hari", 10);
             $table->time("jam_mulai");
             $table->time("jam_akhir");
-            $table->string("makul", 50);
+            $table->string("mapel", 50);
             $table->timestamps();
         });
     }

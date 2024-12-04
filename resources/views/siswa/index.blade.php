@@ -6,6 +6,7 @@
     <h1>Siswa</h1>
 @stop
 
+
 @section('content')
     <div class="row">
         <div class="col-md-6">
@@ -38,7 +39,7 @@
 
 
             {{-- With extra information on the bottom slot --}}
-            <x-adminlte-input name="nim" label="NIM" placeholder="nim">
+            <x-adminlte-input name="nis" label="NIS" placeholder="nis">
                 
             </x-adminlte-input>
 
@@ -47,30 +48,33 @@
         </form>
 
 {{-- Setup data for datatables --}}
-@php
-$heads = [
-    'RFID',
-    'Nama',
-    ['label' => 'NIM', 'width' => 40],
-    ['label' => 'Actions', 'no-export' => true, 'width' => 10],
-];
+<div class="col-md-12">
+    @php
+    $heads = [
+        'RFID',
+        'Nama',
+        ['label' => 'NIS', 'width' => 40],
+        ['label' => 'Actions', 'no-export' => true, 'width' => 10],
+    ];
+    @endphp
 
-@endphp
-
-{{-- Minimal example / fill data using the component slot --}}
-<x-adminlte-datatable id="table1" :heads="$heads">
-    @foreach ($siswas as $item)
-    <tr>
-        <td>{{$item->rfid}}</td>
-        <td>{{$item->nama}}</td>
-        <td>{{$item->nim}}</td>
-        <td><a href="{{URL::signedRoute("siswa.edit", $item->id)}}" class="btn btn-primary">Edit</a></td>
-    </tr>
-@endforeach
-</x-adminlte-datatable>
-    
-        </div>
+    {{-- Buat tabel menggunakan container-fluid agar lebih lebar --}}
+    <div class="container-fluid px-0">
+        <x-adminlte-datatable id="table1" :heads="$heads" class="table table-bordered table-hover w-100">
+            @foreach ($siswas as $item)
+            <tr>
+                <td>{{ $item->rfid }}</td>
+                <td>{{ $item->nama }}</td>
+                <td>{{ $item->nis }}</td>
+                <td>
+                    <a href="{{ URL::signedRoute('siswa.edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                </td>
+            </tr>
+            @endforeach
+        </x-adminlte-datatable>
     </div>
+</div>
+
 
     
     

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rekap;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 
 class RekapController extends Controller
@@ -10,9 +11,17 @@ class RekapController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function jadwalIndex()
     {
-        //
+        $jadwals = Jadwal::all();
+        return view('rekap.jadwal', compact('jadwals'));
+    }
+    
+    public function rekapByJadwal($jadwal_id)
+    {
+        $rekaps = Rekap::with('siswa')->where('jadwal_id', $jadwal_id)->get();
+        $jadwal = Jadwal::findOrFail($jadwal_id);
+        return view('rekap.rekapbyjadwal', compact('rekaps', 'jadwal'));
     }
 
     /**

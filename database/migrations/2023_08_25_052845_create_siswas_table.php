@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("rfid", 50);
             $table->string("nama", 50);
-            $table->string("nim",20);
+            $table->string("nis",20);
             $table->timestamps();
         });
     }
