@@ -19,14 +19,14 @@ class RekapExport implements FromCollection, WithHeadings, WithStyles, WithColum
      */
     public function collection()
     {
-        // Ambil data rekap dengan join untuk mendapatkan nama siswa, NIS, mapel, dan waktu absen
+        
         return Rekap::join('siswas', 'rekaps.siswa_id', '=', 'siswas.id')
                     ->join('jadwals', 'rekaps.jadwal_id', '=', 'jadwals.id')
                     ->select(
-                        'siswas.nama',         // Nama Siswa
-                        'siswas.nis',          // NIS
-                        'jadwals.mapel',       // Mata Pelajaran
-                        'rekaps.created_at as waktu_absen' // Waktu Absen
+                        'siswas.nama',         
+                        'siswas.nis',         
+                        'jadwals.mapel',       
+                        'rekaps.created_at as waktu_absen' 
                     )
                     ->get();
     }
@@ -39,10 +39,10 @@ class RekapExport implements FromCollection, WithHeadings, WithStyles, WithColum
     public function headings(): array
     {
         return [
-            'Nama Siswa',      // Header untuk Nama Siswa
-            'NIS',             // Header untuk NIS
-            'Mata Pelajaran',  // Header untuk Mata Pelajaran
-            'Waktu Absen',     // Header untuk Waktu Absen
+            'Nama Siswa',      
+            'NIS',             
+            'Mata Pelajaran',  
+            'Waktu Absen',     
         ];
     }
 
@@ -51,12 +51,12 @@ class RekapExport implements FromCollection, WithHeadings, WithStyles, WithColum
      */
     public function styles($sheet)
     {
-        // Menambahkan style pada header
-        $sheet->getStyle('A1:D1')->getFont()->setBold(true); // Membuat font header menjadi bold
-        $sheet->getStyle('A1:D1')->getAlignment()->setHorizontal('center'); // Menyelaraskan teks ke tengah
-        $sheet->getStyle('A1:D1')->getFill()->setFillType('solid')->getStartColor()->setARGB('FFFF00'); // Background header kuning
+        
+        $sheet->getStyle('A1:D1')->getFont()->setBold(true); 
+        $sheet->getStyle('A1:D1')->getAlignment()->setHorizontal('center'); 
+        $sheet->getStyle('A1:D1')->getFill()->setFillType('solid')->getStartColor()->setARGB('FFFF00'); 
 
-        // Menambahkan border pada seluruh tabel
+    
         $sheet->getStyle('A1:D' . $sheet->getHighestRow())
               ->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
     }
@@ -67,7 +67,7 @@ class RekapExport implements FromCollection, WithHeadings, WithStyles, WithColum
     public function columnFormats(): array
     {
         return [
-            'D' => 'yyyy-mm-dd hh:mm:ss', // Format untuk Waktu Absen
+            'D' => 'yyyy-mm-dd hh:mm:ss', 
         ];
     }
 
