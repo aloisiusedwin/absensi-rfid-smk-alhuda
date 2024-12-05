@@ -10,7 +10,7 @@
 <body>
     
 <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-  <a class="navbar-brand" href="#">  <img src="{{asset("img/logo.png")}}" width="120" height="70" class="d-inline-block align-top" alt="">
+  <a class="navbar-brand" href="#">  <img src="{{asset("img/logo.png")}}" width="100" height="100" class="d-inline-block align-top" alt="">
 </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
