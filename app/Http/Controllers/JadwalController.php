@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateJadwalRequest;
 use App\Models\Jadwal;
 use App\Services\JadwalService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class JadwalController extends Controller
 {
@@ -27,10 +29,11 @@ class JadwalController extends Controller
     public function index()
     {
         $hari = JadwalController::HARI;
-        $jadwals = Jadwal::all();
-
-        return view("jadwal.index", compact("hari",'jadwals'));
+        $jadwals = $this->jadwalService->getAll(Auth::id());
+    
+        return view("jadwal.index", compact("hari", "jadwals"));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -43,23 +46,14 @@ class JadwalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(JadwalPostRequest $jadwalPostRequest)
+    public function store(Request $request)
     {
-        $attr = $jadwalPostRequest->validated();
-        
-        $pass = $this->jadwalService->checkTimeAvailability($attr);
+        $data = $request->only(['mapel', 'hari', 'jam_mulai', 'jam_akhir']);
+        $data['user_id'] = Auth::id(); 
 
-        if($pass){
-            return redirect()->route("jadwal")->with("error", "Waktu pada hari tersebut sudah di booking!");
-        }
+        $this->jadwalService->addJadwal($data);
 
-        $data = $this->jadwalService->addJadwal($attr);
-
-        if($data instanceof Jadwal){
-            return redirect()->route("jadwal")->with("msg", "Data berhasil ditambahkan");
-        }elseif($data instanceof \Throwable){
-            return redirect()->route("jadwal")->with("error", $data->getMessage());
-        }
+        return redirect()->route("jadwal")->with("msg", "Data berhasil ditambahkan");
     }
 
     /**
@@ -75,10 +69,11 @@ class JadwalController extends Controller
      */
     public function edit($id)
     {
-        $jadwal = $this->jadwalService->findJadwalById($id);
-        $hari = JadwalController::HARI;
-
-        return view("jadwal.edit", compact("jadwal", 'hari'));
+        $jadwal = $this->jadwalService->findJadwalById($id, Auth::id());
+    
+        $hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+    
+        return view('jadwal.edit', compact('jadwal', 'hari'));
     }
 
     /**
@@ -87,27 +82,36 @@ class JadwalController extends Controller
     public function update(UpdateJadwalRequest $updateJadwalRequest)
     {
         $attr = $updateJadwalRequest->validated();
-        
+    
         $updated = $this->jadwalService->update($attr);
-
-        if($updated){
-            return redirect()->route("jadwal")->with("msg","jadwal berhasil dirubah");
+    
+        if ($updated) {
+            return redirect()->route("jadwal.index")->with("msg", "Jadwal berhasil dirubah");
         }
-
-        return redirect()->route("jadwal")->with("error","jadwal siswa gagal dirubah");
+    
+        return redirect()->route("jadwal.index")->with("error", "Jadwal gagal dirubah");
     }
+    
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        $deleted = $this->jadwalService->delete($id);
+        $deleted = $this->jadwalService->delete($id, Auth::id());
     
         if ($deleted) {
             return redirect()->route("jadwal")->with("msg", "Jadwal berhasil dihapus");
         }
     
         return redirect()->route("jadwal")->with("error", "Gagal menghapus jadwal");
+    }
+    
+    public function getJadwal()
+    {
+        $jadwal = $this->jadwalService->getAllJadwalForUser(Auth::id());
+
+        return response()->json($jadwal);
     }
 }

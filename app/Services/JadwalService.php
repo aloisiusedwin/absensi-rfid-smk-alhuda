@@ -1,8 +1,9 @@
 <?php
-namespace App\Services;
 
+namespace App\Services;
+use App\Models\Siswa;
+use Illuminate\Support\Facades\Auth;
 use App\Repository\JadwalRepository;
-use Carbon\Carbon;
 
 class JadwalService
 {
@@ -13,14 +14,9 @@ class JadwalService
         $this->jadwalRepository = $jadwalRepository;
     }
 
-    public function checkRfid($data)
+    public function getAll($userId)
     {
-        return $this->jadwalRepository->checkRfid($data);
-    }
-
-    public function homepage($hari, $waktu)
-    {
-        return $this->jadwalRepository->getTimeByDay($hari, $waktu);
+        return $this->jadwalRepository->getAllForUser($userId);
     }
 
     public function addJadwal($attr)
@@ -28,38 +24,55 @@ class JadwalService
         return $this->jadwalRepository->insert($attr);
     }
 
-    public function checkTimeAvailability($attr)
+    public function getAllJadwalForUser($userId)
     {
-        $res = $this->__getTime($attr['hari'], $attr['jam_mulai']);
-     
-        if($res){
-            return true;
-        }
-
-        return false;
-        
+        return $this->jadwalRepository->getAllForUser($userId);
     }
 
-    private function __getTime($hari, $waktuPeriksa)
+    public function checkRfidForUser($rfid, $userId)
     {
-        $res = $this->jadwalRepository->getTimeByDay($hari, $waktuPeriksa);
-
-        return $res;
+        return Siswa::where('rfid', $rfid)
+                    ->where('user_id', $userId)
+                    ->first();
     }
 
-    public function findJadwalById($id)
+    public function getJadwalForDayAndTime($userId, $hariSekarang, $waktuSekarang)
     {
-        return $this->jadwalRepository->getId($id);
+        return $this->jadwalRepository->getJadwalForDayAndTime($userId, $hariSekarang, $waktuSekarang);
     }
 
-    public function update($data)
+    public function findJadwalById($id, $userId)
     {
-        return $this->jadwalRepository->update($data);
+        return $this->jadwalRepository->getId($id, $userId);
+    }
+
+    public function delete($id, $userId)
+    {
+        return $this->jadwalRepository->delete($id, $userId);
+    }
+
+    public function homepage($hari, $waktu)
+    {
+        $userId = auth()->id(); 
+        return $this->jadwalRepository->getTimeByDay($hari, $waktu, $userId);
     }
     
-    public function delete($id)
+    public function update(array $data)
     {
-        return $this->jadwalRepository->delete($id);
+
+    $jadwal = $this->jadwalRepository->findJadwalById($data['jadwal_id'], Auth::id());
+
+    if (!$jadwal) {
+        return false;  
+    }
+
+    $jadwal->mapel = $data['mapel'];
+    $jadwal->jam_mulai = $data['jam_mulai'];
+    $jadwal->jam_akhir = $data['jam_akhir'];
+    $jadwal->hari = $data['hari'];
+
+
+    return $jadwal->save(); 
     }
 
 }

@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('rekaps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("siswa_id");
-            $table->foreignId("jadwal_id");
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId("siswa_id")->constrained()->onDelete('cascade');
+            $table->foreignId("jadwal_id")->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

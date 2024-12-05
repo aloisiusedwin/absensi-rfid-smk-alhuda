@@ -31,6 +31,11 @@ class SiswaRepository
         return $s->update($attr);
     }
 
+    public function getAllForUser($userId): Collection|array
+    {
+    return $this->siswa->where('user_id', $userId)->get();
+    }
+    
     public function findId($id)
     {
         return $this->siswa->find($id);

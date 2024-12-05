@@ -5,6 +5,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\RekapController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AbsensiController;
 use App\Exports\RekapExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;

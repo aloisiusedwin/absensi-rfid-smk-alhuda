@@ -8,12 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
-    
+
     protected $table = "siswas";
     protected $guarded = ['id'];
-    
-    public function rekaps()
+
+   // Relasi dengan User
+    public function user()
     {
-        return $this->hasMany(Rekap::class);
+        return $this->belongsTo(User::class);
+    }
+
+    // Relasi dengan Jadwal
+    public function jadwal()
+    {
+        return $this->belongsTo(Jadwal::class);
     }
 }

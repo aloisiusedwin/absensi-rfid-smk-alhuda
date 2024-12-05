@@ -3,20 +3,15 @@
 namespace App\Repository;
 
 use App\Models\Jadwal;
-use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
 
 class JadwalRepository
 {
     protected Jadwal $jadwal;
-    protected Siswa $siswa;
 
-    public function __construct(
-        Jadwal $jadwal,
-        Siswa $siswa
-    ) {
+    public function __construct(Jadwal $jadwal)
+    {
         $this->jadwal = $jadwal; 
-        $this->siswa = $siswa;
     }
 
     public function insert($attr)
@@ -24,61 +19,63 @@ class JadwalRepository
         try {
             DB::beginTransaction();
             $jadwal = $this->jadwal->create($attr);
-
             DB::commit();
-
             return $jadwal;
         } catch (\Throwable $e) {
             DB::rollBack();
-
             return $e;
         }
     }
 
-    /**
-     * Undocumented function
-     *
-     * @param string $data
-     * @return App\Siswa
-     */
-    public function checkRfid($data) : Siswa
+    public function getAllForUser($userId)
     {
-        //cek apakah rfid tersebut ada dalam DB
-        return $this->siswa->where("rfid","=",$data)->first();
+        return $this->jadwal->where('user_id', $userId)->get();
     }
 
-    public function getTimeByDay($hari, $waktuPeriksa)
+    public function getId($id, $userId)
     {
-        $data = $this->jadwal->where("hari",'=',$hari)
-            ->whereTime('jam_mulai', '<=', $waktuPeriksa)
-            ->whereTime('jam_akhir', '>=', $waktuPeriksa)
-            ->first();
-        
-            
-        return $data;
+    return $this->jadwal->where('id', $id)->where('user_id', $userId)->first();
     }
 
-    public function getId($id)
+    public function findJadwalById($id, $userId)
     {
-        return $this->jadwal->where("id","=",$id)->first();
+    return $this->jadwal->where('id', $id)
+                        ->where('user_id', $userId)
+                        ->first();
+    }
+
+    public function getJadwalForDayAndTime($userId, $hariSekarang, $waktuSekarang)
+    {
+        return $this->jadwal->where('user_id', $userId)
+                            ->where('hari', $hariSekarang) 
+                            ->where('jam_mulai', '<=', $waktuSekarang) 
+                            ->where('jam_akhir', '>=', $waktuSekarang) 
+                            ->first(); 
     }
     
+    public function getTimeByDay($hari, $waktu, $userId)
+    {
+        return Jadwal::where('hari', $hari)
+                     ->where('jam_mulai', '<=', $waktu)
+                     ->where('jam_akhir', '>=', $waktu)
+                     ->where('user_id', $userId) // Filter berdasarkan user_id
+                     ->first();
+    }
+
     public function update($data)
     {
-        $s = $this->jadwal->where("id","=",$data["jadwal_id"])->first();
-
-        return $s->update($data);
+        $jadwal = $this->jadwal->where('id', $data['jadwal_id'])->where('user_id', $data['user_id'])->first();
+        return $jadwal ? $jadwal->update($data) : false;
     }
-    
-    public function delete($id)
+
+    public function delete($id, $userId)
     {
-        $jadwal = Jadwal::find($id);
+        $jadwal = Jadwal::where('id', $id)->where('user_id', $userId)->first();
         if ($jadwal) {
             return $jadwal->delete();
         }
-    
         return false;
     }
     
-
 }
+
