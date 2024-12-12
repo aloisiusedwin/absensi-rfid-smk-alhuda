@@ -87,7 +87,7 @@ $heads = [
 @stop
 
 @section('css')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.7.13/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.7.13/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
 @stop
 
 @section('plugins.Datatables', true)
