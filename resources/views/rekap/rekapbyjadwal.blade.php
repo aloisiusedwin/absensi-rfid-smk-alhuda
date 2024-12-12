@@ -7,12 +7,11 @@
 @stop
 
 @section('content')
-    <x-adminlte-datatable id="rekapTable" :heads="['Nama Siswa', 'NIS', 'Waktu Absen']">
+    <x-adminlte-datatable id="rekapTable" :heads="['Nama Siswa', 'NIS']">
         @foreach ($rekaps as $rekap)
             <tr>
                 <td>{{ $rekap->siswa->nama }}</td>
                 <td>{{ $rekap->siswa->nis }}</td>
-                <td>{{ $rekap->created_at->format('d-m-Y H:i:s') }}</td>
             </tr>
         @endforeach
     </x-adminlte-datatable>

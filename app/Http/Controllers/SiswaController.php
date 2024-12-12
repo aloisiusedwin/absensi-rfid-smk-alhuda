@@ -6,6 +6,8 @@ use App\Http\Requests\SiswaPostRequest;
 use App\Http\Requests\UpdateSiswaRequest;
 use App\Models\Siswa;
 use App\Services\SiswaService;
+use Illuminate\Support\Facades\Auth;
+
 
 class SiswaController extends Controller
 {
@@ -21,11 +23,12 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $siswas = Siswa::all();
-
+        $userId = Auth::id();
+        $siswas = $this->siswaService->getAll($userId);
+    
         return view("siswa.index", compact("siswas"));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -40,16 +43,17 @@ class SiswaController extends Controller
     public function store(SiswaPostRequest $siswaPostRequest)
     {
         $validated = $siswaPostRequest->validated();
-        
+        $validated['user_id'] = Auth::id();
+    
         $data = $this->siswaService->addSiswa($validated);
-
-        if($data instanceof Siswa){
+    
+        if ($data instanceof Siswa) {
             return redirect()->route("siswa")->with("msg", "Data berhasil ditambahkan");
-        }elseif($data instanceof \Throwable){
+        } elseif ($data instanceof \Throwable) {
             return redirect()->route("siswa")->with("error", $data->getMessage());
         }
-        
     }
+    
 
     /**
      * Display the specified resource.

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\JadwalService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Auth;
 
 class HomepageController extends Controller
 {
@@ -12,18 +13,17 @@ class HomepageController extends Controller
 
     public function __construct(JadwalService $jadwalService)
     {
-        $this->jadwalService = $jadwalService;;
+        $this->jadwalService = $jadwalService;
     }
 
     public function index()
     {
-        // tampilkan jadwal waktu sekarang
-        $hariSekarang =strtolower(Carbon::now()->isoFormat('dddd', Lang::get('id')));
+
+        $hariSekarang = strtolower(Carbon::now()->isoFormat('dddd', Lang::get('id'))); 
         $waktuSekarang = Carbon::now()->format('H:i');
-        
-        $jadwal = $this->jadwalService->homepage($hariSekarang, $waktuSekarang);
-        
-        
-        return view("index", compact("jadwal", 'waktuSekarang'));
+
+        $jadwal = $this->jadwalService->getJadwalForDayAndTime(Auth::id(), $hariSekarang, $waktuSekarang);
+
+        return view('index', compact('jadwal', 'waktuSekarang'));
     }
 }

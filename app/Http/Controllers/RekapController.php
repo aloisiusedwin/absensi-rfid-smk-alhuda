@@ -4,25 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Models\Rekap;
 use App\Models\Jadwal;
+use App\Services\JadwalService; 
+use App\Services\RekapService; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class RekapController extends Controller
 {
+
+    protected JadwalService $jadwalService;  
+    protected RekapService $rekapService;
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct(JadwalService $jadwalService, RekapService $rekapService)
+    {
+         $this->jadwalService = $jadwalService;   
+         $this->rekapService = $rekapService;    
+    }
+
     public function jadwalIndex()
     {
-        $jadwals = Jadwal::all();
+        $jadwals = $this->jadwalService->getAll(Auth::id());
         return view('rekap.jadwal', compact('jadwals'));
     }
     
+    
     public function rekapByJadwal($jadwal_id)
     {
-        $rekaps = Rekap::with('siswa')->where('jadwal_id', $jadwal_id)->get();
-        $jadwal = Jadwal::findOrFail($jadwal_id);
+        $rekaps = $this->rekapService->getRekapByJadwal($jadwal_id, Auth::id());
+        $jadwal = $this->jadwalService->findJadwalById($jadwal_id, Auth::id());
+    
         return view('rekap.rekapbyjadwal', compact('rekaps', 'jadwal'));
     }
+    
+    
 
     /**
      * Show the form for creating a new resource.

@@ -28,7 +28,7 @@
 
 
             {{-- With extra information on the bottom slot --}}
-            <x-adminlte-input name="nim" value="{{$siswa->nim}}" label="NIM" placeholder="nim">
+            <x-adminlte-input name="nis" value="{{$siswa->nis}}" label="NIS" placeholder="nis">
                 
             </x-adminlte-input>
 

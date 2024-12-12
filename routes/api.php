@@ -18,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:sanctum')->post("absen", [AbsenApiController::class, "store"]);
 
-Route::post("absen", [AbsenApiController::class, "store"])->name("api.store");

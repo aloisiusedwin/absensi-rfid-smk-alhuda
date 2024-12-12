@@ -18,6 +18,11 @@ class SiswaService {
         return $this->siswaRepository->findId($id);
     }
 
+    public function getAll($userId)
+    {
+    return $this->siswaRepository->getAllForUser($userId);
+    }
+
     public function addSiswa($attr)
     {
         return $this->siswaRepository->insert($attr);
